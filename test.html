@@ -509,6 +509,7 @@ const ITEMS=[
           {label:'나침반으로 내 전자석의 극을 관찰함',fn(){return {ok:!!(M.seen&&M.seen.own),detail:M.seen&&M.seen.own?'내 전자석 가까이에서 나침반 바늘이 움직임':'관찰 기록 없음'}}}],
   setup(m){addSample(m,'bolt',330,190,1,{pole:plan().pole,hit:[-265,-160,520,200]});lockedCompass(m,128,186);lockedCompass(m,520,186)}},
 ];
+for(const it of ITEMS){it.tray=FULL;it.limits=LIMITS}   // every item: the same full tray with the same fixed limits
 
 /* ---------- state ---------- */
 const KEY='elec-test-v1';
