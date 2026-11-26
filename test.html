@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>전기 단원평가</title>
+<title>우주 정거장 전력 복구 · 전기 단원평가</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
-/* Unit assessment version of 전기 탐구실: every item starts from an empty bench; the worksheet sits beside it. Single light theme by choice (lab-bench look). */
+/* Unit assessment version of 전기 탐구실, dressed as "우주 정거장 전력 복구": navy station chrome around a light work bench. Each item is a station module that lights up when its report is submitted (not when it is correct). */
 :root{
-  --ink:#17312e;
-  --ink-soft:#4f625d;
-  --teal:#0f6b65;
-  --teal-deep:#0a4a46;
-  --paper:#f5f6f2;
+  --ink:#14233b;
+  --ink-soft:#4e5d73;
+  --teal:#2a62b8;
+  --teal-deep:#0d2240;
+  --paper:#edf1f7;
   --card:#ffffff;
-  --line:#d3dbd6;
+  --line:#d2dae6;
   --glow:#ffc531;
   --sky:#d9eef7;
   --sky-line:#5aa6c8;
@@ -36,7 +36,7 @@ button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--glow);outline-offset:2px}
 
-.top{background:var(--teal);color:#fff}
+.top{background-color:#0d2240;background-image:radial-gradient(#ffffff66 1px,transparent 1.6px),radial-gradient(#ffffff30 1px,transparent 1.6px);background-size:47px 47px,29px 29px;background-position:0 0,13px 17px;color:#fff}
 .top-in{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1480px;margin:0 auto}
 .brand{display:flex;align-items:baseline;gap:12px;flex:1 1 auto;min-width:0}
 .brand h1{font:400 28px/1.1 var(--font-display);margin:0;letter-spacing:-.5px}
@@ -47,7 +47,33 @@ button{cursor:pointer}
 .btn-light{border:1px solid #ffffff55;background:#ffffff1a;color:#fff;border-radius:8px;padding:7px 12px}
 .btn-light:hover{background:#ffffff33}
 
-.missions{background:var(--teal-deep)}
+.missions{background:#0a1a33;border-top:1px solid #1d3558}
+.station{display:flex;align-items:center;overflow-x:auto;padding:10px 0 12px;scrollbar-width:thin}
+.st-label{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.08em;color:#0d2240;background:var(--glow);border-radius:5px;padding:1px 7px;margin-right:10px}
+.mod{flex:0 0 auto;display:flex;align-items:center;gap:8px;border:1.5px solid #2b4a78;background:#11284a;color:#8fa6c8;border-radius:12px;padding:6px 12px 6px 8px;text-align:left}
+.mod:hover{border-color:#5a83bd}
+.mod svg{width:26px;height:26px;flex:0 0 26px}
+.mod .mt{display:flex;flex-direction:column;line-height:1.25}
+.mod b{font:400 15px var(--font-display);color:#dbe6f6;font-weight:400}
+.mod em{font-style:normal;font-size:11px}
+.mod[aria-selected="true"]{border-color:#9cc3ff;background:#173763;box-shadow:0 0 0 2px #9cc3ff33}
+.mod.run em{color:#7fc4ff}
+.mod.over em{color:#ff9d8a}
+.mod.done{background:#3a2f0a;border-color:var(--glow);color:var(--glow)}
+.mod.done b{color:#fff3c4}
+.mod.done em{color:var(--glow)}
+.mod.done svg{filter:drop-shadow(0 0 5px #ffc531aa)}
+.pw{flex:0 0 22px;height:3px;background:#2b4a78;border-radius:2px}
+.pw.on{background:var(--glow)}
+.st-note{margin-left:14px;font-size:12px;color:#8fa6c8;flex:0 0 auto}
+.st-note.all{color:var(--glow);font-weight:600}
+.btn-light.pulse{background:var(--glow);color:#0d2240;border-color:var(--glow);font-weight:600;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px #ffc53144}}
+@media (prefers-reduced-motion:reduce){.btn-light.pulse{animation:none}}
+.mission{display:flex;gap:10px;align-items:flex-start;background:#0d2240;color:#dbe6f6;border-radius:10px;padding:10px 12px}
+.mission svg{width:32px;height:32px;flex:0 0 32px;color:var(--glow)}
+.mission b{display:block;font:400 17px/1.3 var(--font-display);color:#fff}
+.mission span{font-size:13px;color:#b8c8e0;line-height:1.5}
 .missions-in{display:flex;align-items:stretch;gap:2px;overflow-x:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1480px;margin:0 auto;scrollbar-width:thin}
 .grp{flex:0 0 auto;align-self:center;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--teal-deep);background:#bfe0db;border-radius:5px;padding:1px 7px;margin:0 4px 0 10px}
 .grp:first-child{margin-left:0}
@@ -62,7 +88,7 @@ button{cursor:pointer}
 .work.rmode{grid-template-columns:minmax(0,500px) minmax(0,1fr)}
 .brief{display:flex;flex-direction:column;gap:14px;min-width:0}
 .sheet{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:12px}
-.code{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--teal);background:#e3f0ee;border-radius:6px;padding:2px 8px}
+.code{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--teal);background:#e4ecf8;border-radius:6px;padding:2px 8px}
 .code.adv{background:#fff1c7;color:#7a5500}
 .sheet h2{font:400 25px/1.25 var(--font-display);margin:0;text-wrap:balance}
 .story{margin:0}
@@ -163,7 +189,7 @@ details.help ul{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:c
 .tb.warn{color:var(--red);border-color:#e9c3bc}
 .tb.primary{background:var(--teal);border-color:var(--teal);color:#fff}
 .tb.primary:hover{background:var(--teal-deep)}
-.stage{position:relative;background:#e7eae4}
+.stage{position:relative;background:#e8edf3}
 .stage canvas{display:block;width:100%;touch-action:none}
 .toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:var(--ok);color:#fff;padding:8px 16px;border-radius:999px;font-weight:600;box-shadow:0 6px 18px #0003;pointer-events:none;transition:opacity .3s}
 .status{padding:8px 14px;font-size:14px;color:var(--ink-soft);border-top:1px solid var(--line);min-height:38px;background:#fafbf8}
@@ -177,13 +203,43 @@ details.help ul{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:c
 .titem .cnt{font-style:normal;font-size:11px;color:var(--ink-soft);pointer-events:none;min-height:14px}
 .titem.out{opacity:.45}
 .tray.locked .titem{opacity:.4;pointer-events:none}
+.limits{margin:0;font-size:13px;color:var(--ink-soft);background:#f6f8f5;border-radius:9px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.limits b{color:var(--ink);font-size:12px;letter-spacing:.02em}
+.clockbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--line);background:#fbfcfa}
+.clk{display:flex;align-items:baseline;gap:8px;min-width:170px}
+.clk span{font-size:13px;color:var(--ink-soft)}
+.clk b{font:400 30px/1 var(--font-display);font-variant-numeric:tabular-nums;color:var(--teal-deep)}
+.clk-track{flex:1 1 120px;height:10px;border-radius:999px;background:#e3e9e5;overflow:hidden}
+.clk-track i{display:block;height:100%;width:100%;background:var(--teal);border-radius:999px;transition:width .25s linear}
+.clockbar.hurry .clk b{color:var(--red)}
+.clockbar.hurry .clk-track i{background:var(--red)}
+.clockbar.over .clk b,.clockbar.done .clk b{color:var(--ink-soft)}
+.chance{display:flex;align-items:center;gap:8px}
+.dots{display:flex;gap:4px}
+.dots{gap:8px}
+.dots i{position:relative;width:22px;height:12px;border-radius:3px;background:#dfe5ee;border:2px solid #c3cddb}
+.dots i::after{content:'';position:absolute;right:-6px;top:1px;width:3px;height:6px;border-radius:0 2px 2px 0;background:#c3cddb}
+.dots i.on{background:var(--glow);border-color:#d39a12}
+.dots i.on::after{background:#d39a12}
+.chance-n{font-size:12px;color:var(--ink-soft)}
+#chanceBtn.warn{background:var(--glow);border-color:#e0a21a;color:var(--ink);font-weight:600}
+.gate{position:absolute;inset:0;display:grid;place-items:center;background:rgba(231,234,228,.82);backdrop-filter:blur(2px);padding:16px}
+.gate-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;max-width:440px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;box-shadow:0 10px 30px #0002}
+.gate-card>b{font:400 24px/1.2 var(--font-display)}
+.gate-card p{margin:0;font-size:14px;color:var(--ink-soft)}
+.gate-card .tb.primary{font-size:17px;padding:10px 26px;margin-top:6px}
+.pdfbox{border:2px solid var(--sky-line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;background:#f6fbfd}
+.pdfbox h3{margin:0;font-size:16px}
+.pdfbox p{margin:0;font-size:13px;color:var(--ink-soft)}
+.pdfrow{display:flex;gap:8px;flex-wrap:wrap}
+.pdfrow input{flex:1 1 160px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:#fff}
 
 .overlay{position:fixed;inset:0;background:#0b25228c;z-index:20;display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
 .report{background:var(--card);border-radius:16px;max-width:920px;width:100%;padding:22px 24px;display:flex;flex-direction:column;gap:16px}
 .report-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .report-head h2{font:400 26px var(--font-display);margin:0;flex:1 1 auto}
 .rm{border-top:2px solid var(--line);padding-top:14px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px}
-.rm img{width:100%;border-radius:8px;border:1px solid var(--line);background:#e7eae4}
+.rm img{width:100%;border-radius:8px;border:1px solid var(--line);background:#e8edf3}
 .rm h3{margin:0 0 4px;font-size:17px}
 .rm .meta{font-size:13px;color:var(--ink-soft);margin-bottom:6px}
 .rm .ans{white-space:pre-wrap;background:#f6f8f5;border-radius:8px;padding:8px 10px;font-size:14px;margin:6px 0}
@@ -221,21 +277,23 @@ details.help ul{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:c
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <div class="brand"><h1>전기 단원평가</h1><span>6학년 2학기 과학 · 전기의 이용 · 회로를 스스로 만들어 해결해요</span></div>
+  <div class="brand"><h1>우주 정거장 전력 복구</h1><span>6학년 2학기 과학 · 전기의 이용 단원평가 · 회로를 스스로 만들어 정거장을 살려요</span></div>
   <span class="prog" id="progress"></span>
   <div class="who"><label for="sname">이름</label><input id="sname" autocomplete="off" placeholder="반 번호 이름"></div>
   <button class="btn-light" id="openReport" type="button">평가 기록 보기</button>
 </div></header>
-<nav class="missions" aria-label="평가 문항"><div class="missions-in" id="mtabs" role="tablist"></div></nav>
+<nav class="missions" aria-label="정거장 지도 (평가 문항)"><div class="missions-in station" id="mtabs" role="tablist"></div></nav>
 
 <main class="work" id="work">
   <aside class="brief" id="brief">
     <div class="sheet first" id="missionSheet">
       <div class="headrow"><span class="qno" id="mno"></span><span class="code" id="mcode"></span></div>
+      <div class="mission" id="mission"></div>
       <h2 id="mtitle"></h2>
       <p class="story" id="mstory"></p>
       <div class="goals-h" id="goalsH">해야 할 일</div>
       <ul class="goals" id="mgoals"></ul>
+      <p class="limits"><b>준비물 (모든 문항에서 똑같아요)</b><span id="limits"></span></p>
       <div class="extra" id="mextra"></div>
     </div>
     <div class="sheet answer" id="answerSheet">
@@ -271,9 +329,21 @@ details.help ul{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:c
       <button class="tb" id="undo" type="button" title="Ctrl+Z">되돌리기</button>
       <button class="tb" id="reset" type="button">처음으로</button>
     </div>
+    <div class="clockbar idle" id="clockbar">
+      <div class="clk"><span id="clkL">수리 시간</span><b id="clkT">03:00</b></div>
+      <div class="clk-track"><i id="clkFill"></i></div>
+      <div class="chance"><span class="dots" id="dots" role="img"></span><span class="chance-n" id="chanceN"></span><button class="tb" id="chanceBtn" type="button">예비 배터리 쓰기 +2분</button></div>
+    </div>
     <div class="stage" id="stage">
       <canvas id="cv" tabindex="0" aria-label="전기 회로 실험대. 부품을 끌어 옮기고, 금속 단자에서 끌어 집게 전선을 연결합니다."></canvas>
       <div class="toast" id="toast" hidden></div>
+      <div class="gate" id="gate" hidden><div class="gate-card">
+        <span class="qno" id="gateNo"></span>
+        <b>수리 시간은 3분이에요</b>
+        <p>수리 시작을 누르면 시간이 흘러요. 시간이 끝나면 그때의 회로 그대로 채점되고 실험대가 잠겨요.</p>
+        <p>시간이 모자라면 <b>예비 배터리</b>를 써서 2분 더 받을 수 있어요. 예비 배터리는 시험 전체에서 3번이고, 지금 <b id="gateLeft"></b>번 남았어요.</p>
+        <button class="tb primary" id="startBtn" type="button">수리 시작</button>
+      </div></div>
     </div>
     <div class="status" id="status" role="status"></div>
     <div class="tray" id="tray"><span class="tray-h">준비물</span></div>
@@ -284,9 +354,18 @@ details.help ul{margin:8px 0 2px;padding-left:18px;display:flex;flex-direction:c
   <div class="report" role="dialog" aria-modal="true" aria-labelledby="repTitle">
     <div class="report-head">
       <h2 id="repTitle">평가 기록</h2>
-      <button class="tb" id="copyRep" type="button">글로 복사</button>
-      <button class="tb" id="dlRep" type="button" hidden>파일로 저장</button>
+      <button class="tb" id="copyRep" type="button" hidden>글로 복사</button>
       <button class="tb primary" id="closeRep" type="button">닫기</button>
+    </div>
+    <div class="pdfbox">
+      <h3>패들렛에 올릴 결과 파일 만들기</h3>
+      <p>나만 아는 비밀 코드를 정하면, 그 코드를 넣어야만 열리는 PDF 파일이 저장돼요. 선생님은 선생님 번호로 열 수 있어요.</p>
+      <div class="pdfrow">
+        <input id="code1" type="password" autocomplete="off" maxlength="12" placeholder="비밀 코드 (영어·숫자 4~12자)" aria-label="비밀 코드">
+        <input id="code2" type="password" autocomplete="off" maxlength="12" placeholder="비밀 코드 한 번 더" aria-label="비밀 코드 한 번 더">
+        <button class="tb primary" id="pdfBtn" type="button">잠긴 PDF로 저장</button>
+      </div>
+      <span class="qres no" id="pdfMsg" role="status"></span>
     </div>
     <div id="repBody"></div>
     <div class="teacher" id="pinRow">
@@ -440,7 +519,7 @@ const G={motorDirs:new Set()};
 let RT={},EL={},MAGS=[],hist=[],sel=null,drag=null,hoverTrash=false,obs={};
 let tPrev=performance.now();
 
-function blank(def){const m={parts:[],wires:[],clips:[],nid:1,cnt:{},log:[],answer:'',active:0,thumb:'',seen:{},table:{},vals:{},sub:null};def.setup(m);m.initial=snap(m);return m}
+function blank(def){const m={parts:[],wires:[],clips:[],nid:1,cnt:{},log:[],answer:'',active:0,thumb:'',seen:{},table:{},vals:{},sub:null,startAt:null,chances:0,frozen:null};def.setup(m);m.initial=snap(m);return m}
 function snap(m){return JSON.stringify({parts:m.parts,wires:m.wires,clips:m.clips,nid:m.nid,cnt:m.cnt})}
 function restore(m,s){const o=JSON.parse(s);m.parts=o.parts;m.wires=o.wires;m.clips=o.clips;m.nid=o.nid;m.cnt=o.cnt}
 function mk(m,type,x,y,props={}){const p=Object.assign({id:m.nid++,type,x,y,rot:0},JSON.parse(JSON.stringify(DEF[type]||{})),props);m.cnt[type]=(m.cnt[type]||0)+1;p.label=T[type].name+(['battery','lamp','switch','motor','bolt','compass','magnet'].includes(type)?m.cnt[type]:'');m.parts.push(p);return p}
@@ -539,7 +618,7 @@ function step(dt){
     if(p.sample&&p.kind==='motor'){const rt=RT[p.id]||(RT[p.id]={a:0});const e=EL[p.id];rt.a=(rt.a||0)+Math.sign(e.I)*e.V*dt*4.2}
   }
   updateMagnets();updateClips(dt);updateCompass(dt);
-  if(!M.temp&&!M.sub)watchObs();
+  if(!M.temp&&!isLocked())watchObs();
 }
 function obsNow(){const o={};
   for(const p of M.parts){
@@ -729,8 +808,8 @@ let scale=1,dpr=1;
 function fit(){const r=cv.getBoundingClientRect();const w=Math.max(300,r.width);dpr=Math.min(2,window.devicePixelRatio||1);cv.width=Math.round(w*dpr);cv.height=Math.round(w*H/W*dpr);cv.style.height=(w*H/W)+'px';scale=w/W}
 function render(t){
   const c=cx;c.setTransform(scale*dpr,0,0,scale*dpr,0,0);
-  c.fillStyle='#e7eae4';c.fillRect(0,0,W,H);
-  c.fillStyle='rgba(40,70,60,.07)';for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40)c.fillRect(x-1,y-1,2,2);
+  c.fillStyle='#e8edf3';c.fillRect(0,0,W,H);
+  c.fillStyle='rgba(30,50,90,.08)';for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40)c.fillRect(x-1,y-1,2,2);
   c.save();c.translate(30,36);c.beginPath();c.moveTo(0,-16);c.lineTo(7,4);c.lineTo(0,0);c.lineTo(-7,4);c.closePath();c.fillStyle='#8aa09a';c.fill();text(c,'북',0,18,12,'#6c817b',700);c.restore();
   rr(c,TRASH.x,TRASH.y,TRASH.w,TRASH.h,12);c.fillStyle=hoverTrash?'rgba(201,65,47,.14)':'rgba(255,255,255,.5)';c.fill();c.setLineDash([6,5]);c.lineWidth=2;c.strokeStyle=hoverTrash?'#c9412f':'#a9b6b1';c.stroke();c.setLineDash([]);
   c.save();c.translate(TRASH.x+TRASH.w/2,TRASH.y+32);c.strokeStyle=hoverTrash?'#c9412f':'#7d8f89';c.lineWidth=2.2;c.lineJoin='round';rr(c,-11,-8,22,24,3);c.stroke();c.beginPath();c.moveTo(-15,-9);c.lineTo(15,-9);c.moveTo(-5,-13);c.lineTo(5,-13);c.moveTo(-4,-3);c.lineTo(-4,11);c.moveTo(4,-3);c.lineTo(4,11);c.stroke();c.restore();
@@ -768,7 +847,7 @@ function emptyHolderAt(x,y){return M.parts.find(b=>b.type==='battery'&&!b.cell&&
 
 cv.addEventListener('pointerdown',e=>{
   if(e.button>0||!DEFN)return;cv.focus({preventScroll:true});
-  if(isLocked()){status('제출한 문항이에요. 고칠 수 없어요.');return}
+  if(isLocked()){status(lockMsg());return}
   const {x,y}=wpt(e);const tf=e.pointerType!=='mouse'?1.5:1;
   const term=nearestTerm(x,y,11*tf),end=hitEnd(x,y,10*tf);
   if(end&&!(term&&Math.hypot(term.x-x,term.y-y)<7)){drag={kind:'end',w:end.w,i:end.i,ox:end.ox,oy:end.oy,sx:x,sy:y,moved:false,prev:end.w.ends[end.i].at};select({k:'wire',id:end.w.id})}
@@ -857,7 +936,7 @@ function btn(label,fn,cls='tb'){const b=document.createElement('button');b.type=
 function renderBar(){const acts=$('#acts');acts.replaceChildren();const nm=$('#selName');
   const p=sel&&sel.k==='part'&&part(sel.id),w=sel&&sel.k==='wire'&&M.wires.find(w=>w.id===sel.id);
   $('#undo').disabled=!hist.length;
-  if(isLocked()){sel=null;nm.textContent='제출한 문항이에요';nm.classList.add('none');return}
+  if(isLocked()){sel=null;nm.textContent=M.sub?'제출한 문항이에요':M.frozen?'실험 시간이 끝났어요':'수리 시작을 누르면 실험할 수 있어요';nm.classList.add('none');return}
   if(!p&&!w){sel=null;nm.textContent='부품이나 전선을 눌러 선택하세요';nm.classList.add('none');return}
   nm.classList.remove('none');
   if(w){nm.textContent=(w.color==='red'?'빨간':'검은')+' 집게 전선';acts.append(btn('전선 빼기',delSel,'tb warn'));return}
@@ -888,7 +967,7 @@ function renderTray(){const tr=$('#tray');tr.querySelectorAll('.titem').forEach(
   tr.classList.toggle('locked',isLocked());updateTrayCounts()}
 let trayDrag=null;
 function startTrayDrag(ev,key){ev.preventDefault();if(isLocked())return;trayDrag={key,sx:ev.clientX,sy:ev.clientY,placed:null};
-  const mv=e=>{if(!trayDrag)return;const r=cv.getBoundingClientRect();const inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
+  const mv=e=>{if(!trayDrag||isLocked())return;const r=cv.getBoundingClientRect();const inside=e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
     if(!trayDrag.placed&&inside&&Math.hypot(e.clientX-trayDrag.sx,e.clientY-trayDrag.sy)>8)trayDrag.placed=addFromTray(key,wpt(e));
     const q=wpt(e),pl=trayDrag.placed;
     if(pl&&pl.part){const p=pl.part;const dx=clamp(q.x,20,W-20)-p.x,dy=clamp(q.y,20,H-20)-p.y;p.x+=dx;p.y+=dy;if(p.type==='dish')for(const c of pl.clips){c.x+=dx;c.y+=dy;c.dx=c.x;c.dy=c.y}hoverTrash=overTrash(q.x,q.y)}
@@ -911,17 +990,44 @@ function addFromTray(key,at){if(!DEFN||isLocked())return null;if(remaining(key)<
   select({k:'part',id:p.id});afterAction();return {part:p,clips}}
 
 /* ---------- assessment card ---------- */
+// Fair-test rules (교사가 바꿀 수 있는 값):
+//  · 준비물 개수는 모든 문항에서 똑같이 LIMITS로 정해져 있다.
+//  · 문항마다 '시작하기'를 누르면 ITEM_SEC초 동안 회로를 만든다. 시간이 끝나면 그 순간의 회로가 채점되고 실험대가 잠긴다.
+//  · 시험 전체에서 예비 배터리 CHANCES번. 예비 배터리 한 번에 CHANCE_SEC초가 더해진다.
 // Students get no live right/wrong feedback: the sample itself is the only reference.
-// On 제출하기 the bench is judged as it stands, the answers are stored, and the item locks.
-const TEACHER_PIN='6215';   // 선생님 확인 번호: 채점 결과 보기, 다시 풀게 하기, 모든 기록 지우기
+const TEACHER_PIN='6215';   // 선생님 확인 번호: 채점 결과 보기, 잠긴 PDF 열기, 다시 풀게 하기, 모든 기록 지우기
+const ITEM_SEC=180,CHANCE_SEC=120,CHANCES=3;
+const LIMIT_TEXT='전지 4개(건전지와 끼우개를 모두 합해서) · 집게 전선 6개 · 전구 2개 · 전동기 2개 · 스위치 1개 · 철심·에나멜선·사포·클립 통 각 1개 · 나침반 2개 · 막대자석 1개';
 const TABS=ITEMS.map(m=>m.id);
-const isLocked=()=>!!(M&&M.sub);
-function renderTabs(){const t=$('#mtabs');t.replaceChildren();const g=document.createElement('span');g.className='grp';g.textContent='단원평가';t.append(g);
-  ITEMS.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='mtab';b.setAttribute('role','tab');b.setAttribute('aria-selected',DB.cur===m.id?'true':'false');b.title=m.title;b.textContent=(i+1)+'. '+m.tab;
-    const r=DB.ms[m.id];if(r&&r.sub){const d=document.createElement('span');d.className='done';d.textContent='✓';d.setAttribute('aria-label','제출함');b.append(d)}b.onclick=()=>openTab(m.id);t.append(b)});
-  $('#progress').textContent='제출 '+ITEMS.filter(m=>DB.ms[m.id]&&DB.ms[m.id].sub).length+' / '+ITEMS.length}
-function renderTasks(){const ul=$('#mgoals');ul.replaceChildren();DEFN.tasks.forEach((s,i)=>{const li=document.createElement('li');const bx=document.createElement('span');bx.className='num';bx.textContent=i+1;const tx=document.createElement('span');tx.textContent=s;li.append(bx,tx);ul.append(li)})}
-function renderAsk(){const ex=$('#mextra');ex.replaceChildren();if(!DEFN.ask.length)return;const lk=isLocked();
+const IC={
+ q1:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>',
+ q2:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 19h4M10.5 22h3M12 7a4.5 4.5 0 0 0-2.6 8.2c.4.3.6.8.6 1.3h4c0-.5.2-1 .6-1.3A4.5 4.5 0 0 0 12 7zM12 2v2M4.2 5.2l1.4 1.4M19.8 5.2l-1.4 1.4M2 12h2M20 12h2"/></svg>',
+ q3:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.8"/><path d="M12 10.2C11 6.5 12.5 3 15 3c2 0 2.4 2.6.6 4.2L13.6 9M13.6 12.8c3.7.6 6.4 3.3 5.4 5.5-.8 1.8-3.3 1.2-4.1-1l-.7-2.8M10.4 12.6c-2.7 2.6-6.4 3.1-7.4 1-.8-1.8 1.3-3.4 3.5-2.8l2.6.9"/></svg>',
+ q4:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v8a6 6 0 0 0 12 0V3h-4v8a2 2 0 0 1-4 0V3zM6 7h4M14 7h4"/></svg>',
+ q5:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>'};
+const STATION={
+ q1:{mod:'비상등',mission:'정거장이 깜깜해요! 스위치로 켜고 끌 수 있는 비상등 회로를 만들어 불을 밝혀 주세요.'},
+ q2:{mod:'조명실',mission:'조명실 전구가 견본 전구만큼 밝아야 해요. 견본 상자 속 건전지가 몇 개인지 알아내 주세요.'},
+ q3:{mod:'환풍기',mission:'환풍기가 견본과 똑같은 빠르기로 돌아야 공기가 돌아요. 상자 속 건전지 수를 알아내 주세요.'},
+ q4:{mod:'자석 크레인',mission:'화물 크레인은 견본 전자석과 똑같은 개수의 클립(화물)을 들어 올려야 해요.'},
+ q5:{mod:'항법실',mission:'항법 장치가 길을 찾으려면 전자석의 극이 견본과 같아야 해요. 나침반으로 확인해 주세요.'}};
+const modState=r=>!r||(!r.startAt&&!r.sub)?['','대기']:r.sub?['done','보고 완료']:r.frozen?['over','시간 끝']:['run','수리 중'];
+const deadline=r=>r.startAt+(ITEM_SEC+CHANCE_SEC*(r.chances||0))*1000;
+const chancesUsed=()=>ITEMS.reduce((s,d)=>s+((DB.ms[d.id]&&DB.ms[d.id].chances)||0),0);
+const chancesLeft=()=>Math.max(0,CHANCES-chancesUsed());
+const isLocked=()=>!!(M&&(M.sub||M.frozen||!M.startAt));   // the bench can't be changed
+const answersLocked=()=>!!(M&&M.sub);
+function lockMsg(){return M.sub?'제출한 문항이에요. 고칠 수 없어요.':M.frozen?'실험 시간이 끝났어요. 실험대는 그대로 채점돼요.':'먼저 수리 시작을 눌러 주세요.'}
+function renderTabs(){const t=$('#mtabs');t.replaceChildren();const g=document.createElement('span');g.className='st-label';g.textContent='정거장 지도';t.append(g);
+  ITEMS.forEach((m,i)=>{const r=DB.ms[m.id],[cls,lab]=modState(r);
+    if(i){const w=document.createElement('span');w.className='pw'+(r&&r.sub&&DB.ms[ITEMS[i-1].id]&&DB.ms[ITEMS[i-1].id].sub?' on':'');t.append(w)}
+    const b=document.createElement('button');b.type='button';b.className='mod '+cls;b.setAttribute('role','tab');b.setAttribute('aria-selected',DB.cur===m.id?'true':'false');b.title=m.title;
+    b.innerHTML=IC[m.id]+'<span class="mt"><b>'+(i+1)+'. '+esc(STATION[m.id].mod)+'</b><em>'+lab+'</em></span>';b.onclick=()=>openTab(m.id);t.append(b)});
+  const all=ITEMS.every(m=>DB.ms[m.id]&&DB.ms[m.id].sub);const n=document.createElement('span');n.className='st-note'+(all?' all':'');
+  n.textContent=all?'모든 모듈 보고 완료! 평가 기록 보기에서 잠긴 PDF를 저장해 패들렛에 올리세요.':'제출한 모듈에 불이 켜져요 · 채점 결과와는 상관없어요';t.append(n);$('#openReport').classList.toggle('pulse',all);
+  $('#progress').textContent='제출 '+ITEMS.filter(m=>DB.ms[m.id]&&DB.ms[m.id].sub).length+' / '+ITEMS.length+' · 예비 배터리 '+chancesLeft()+'개'}
+function renderTasks(){const ul=$('#mgoals');ul.replaceChildren();DEFN.tasks.forEach((s,i)=>{const li=document.createElement('li');const bx=document.createElement('span');bx.className='num';bx.textContent=i+1;const tx=document.createElement('span');tx.textContent=s;li.append(bx,tx);ul.append(li)});$('#limits').textContent=LIMIT_TEXT}
+function renderAsk(){const ex=$('#mextra');ex.replaceChildren();if(!DEFN.ask.length)return;const lk=answersLocked();
   const bx=document.createElement('div');bx.className='box-in';const h=document.createElement('h3');h.textContent='나의 답';bx.append(h);
   DEFN.ask.forEach((a,i)=>{const row=document.createElement('div');row.className='qitem';const lab=document.createElement('span');lab.textContent=a.label;row.append(lab);const k='a'+i;
     if(a.kind==='num'){const w=document.createElement('span');w.className='pred';const inp=document.createElement('input');inp.inputMode='numeric';inp.maxLength=2;inp.value=M.vals[k]||'';inp.disabled=lk;inp.setAttribute('aria-label',a.label);
@@ -929,46 +1035,86 @@ function renderAsk(){const ex=$('#mextra');ex.replaceChildren();if(!DEFN.ask.len
     else{const ch=document.createElement('div');ch.className='chips';a.options.forEach((o,j)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=o;b.disabled=lk;b.setAttribute('aria-pressed',M.vals[k]===j?'true':'false');b.onclick=()=>{M.vals[k]=j;log('답 · '+a.label+' '+o);save();renderAsk()};ch.append(b)});row.append(ch)}
     bx.append(row)});
   ex.append(bx)}
+
+/* ---------- timer and chances ---------- */
+let chanceArm=0;
+function renderClock(){const cb=$('#clockbar'),gate=$('#gate');
+  gate.hidden=!!(M.startAt||M.sub);
+  if(!gate.hidden){$('#gateNo').textContent='모듈 '+(ITEMS.indexOf(DEFN)+1)+' · '+STATION[DEFN.id].mod;$('#gateLeft').textContent=chancesLeft()}
+  cb.className='clockbar'+(M.sub?' done':M.frozen?' over':!M.startAt?' idle':'');
+  const btnC=$('#chanceBtn');clearTimeout(chanceArm);chanceArm=0;btnC.textContent='예비 배터리 쓰기 +2분';btnC.classList.remove('warn');
+  btnC.disabled=!M.startAt||!!M.frozen||!!M.sub||chancesLeft()<=0;
+  const dots=$('#dots');dots.replaceChildren();for(let i=0;i<CHANCES;i++){const d=document.createElement('i');d.className=i<chancesLeft()?'on':'';dots.append(d)}
+  dots.setAttribute('aria-label','남은 예비 배터리 '+chancesLeft()+'개');$('#chanceN').textContent=(M.chances?'이 문항에서 '+M.chances+'번 씀 · ':'')+'남은 예비 배터리 '+chancesLeft()+'개';
+  updateClock()}
+function updateClock(){if(!M)return;const t=$('#clkT'),f=$('#clkFill'),l=$('#clkL');
+  if(M.sub){t.textContent='제출함';l.textContent='이 문항은 끝났어요';f.style.width='0%';return}
+  if(M.frozen){t.textContent='시간 끝';l.textContent='답과 설명을 쓰고 제출하세요';f.style.width='0%';return}
+  const total=(ITEM_SEC+CHANCE_SEC*(M.chances||0))*1000;
+  if(!M.startAt){t.textContent=fmtT(ITEM_SEC);l.textContent='수리 시간';f.style.width='100%';return}
+  const left=deadline(M)-Date.now();
+  if(left<=0){freeze(true);return}
+  const s=Math.ceil(left/1000);const txt=fmtT(s);if(t.textContent!==txt)t.textContent=txt;l.textContent='남은 수리 시간';
+  f.style.width=(100*left/total).toFixed(1)+'%';$('#clockbar').classList.toggle('hurry',s<=30)}
+function startItem(){if(M.startAt||M.sub)return;M.startAt=Date.now();log('실험 시작 ('+fmtT(ITEM_SEC)+')','goal');
+  renderClock();renderBar();renderTray();renderTabs();$('#reset').disabled=false;renderSubmit();
+  status(sampleOf()?'시작! 견본은 움직일 수 없고 상자도 열 수 없어요. 준비물로 회로를 만들어 견본과 비교해 보세요.':'시작! 준비물을 골라 회로를 만들어 보세요.');saveNow()}
+function useChance(){const b=$('#chanceBtn');if(b.disabled)return;
+  if(!chanceArm){b.textContent='한 번 더 누르면 +2분';b.classList.add('warn');chanceArm=setTimeout(()=>renderClock(),3000);return}
+  M.chances=(M.chances||0)+1;log('예비 배터리 사용 · 실험 시간 2분 더 (남은 예비 배터리 '+chancesLeft()+'개)','goal');toast('2분 더!');renderClock();renderTabs();saveNow()}
+function gradeNow(){const checks=DEFN.checks.map(c=>{const r=c.fn();return {label:c.label,ok:!!r.ok,detail:r.detail||''}});solve();render(performance.now()/1000);
+  return {at:Date.now(),checks,thumb:thumb(),parts:itemSummary()}}
+function freeze(auto){if(!M||M.frozen||M.sub||!M.startAt)return;drag=null;sel=null;trayDrag=null;
+  M.frozen=Object.assign(gradeNow(),{auto:!!auto});M.thumb=M.frozen.thumb;
+  log((auto?'실험 시간 끝':'실험 마침')+' · 이때의 회로로 채점함 (실험대 준비물: '+M.frozen.parts+')','goal');
+  renderBar();renderTray();renderClock();renderSubmit();renderTabs();$('#reset').disabled=true;$('#undo').disabled=true;
+  status(auto?'실험 시간이 끝났어요. 지금 회로 그대로 채점돼요. 답과 설명을 마저 쓰고 제출하세요.':'실험을 마쳤어요. 답과 설명을 마저 쓰고 제출하세요.',auto);saveNow()}
+
+/* ---------- submit ---------- */
 let subArm=0;
 function renderSubmit(msg){const box=$('#submitBox');box.replaceChildren();clearTimeout(subArm);subArm=0;
-  if(isLocked()){const p=document.createElement('p');p.className='subbed';p.textContent='제출했어요 · '+new Date(M.sub.at).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})+'. 선생님이 다시 열어 주시기 전에는 고칠 수 없어요.';box.append(p);return}
-  const b=btn('제출하기',trySubmit,'tb primary');b.id='subBtn';const s=document.createElement('span');s.className='qres no';s.id='subMsg';s.textContent=msg||'';box.append(b,s)}
+  if(M.sub){const p=document.createElement('p');p.className='subbed';p.textContent='제출했어요 · '+new Date(M.sub.at).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})+'. 선생님이 다시 열어 주시기 전에는 고칠 수 없어요.';box.append(p);return}
+  const b=btn('제출하기',trySubmit,'tb primary');b.id='subBtn';b.disabled=!M.startAt;const s=document.createElement('span');s.className='qres no';s.id='subMsg';s.textContent=msg||(!M.startAt?'수리 시작을 누르고 실험한 뒤에 제출할 수 있어요.':'');box.append(b,s)}
 function trySubmit(){const b=$('#subBtn'),s=$('#subMsg');
+  if(!M.startAt)return;
   if(!DB.name.trim()){s.textContent='맨 위에 이름을 먼저 써 주세요.';$('#sname').focus();return}
   const miss=DEFN.ask.find((a,i)=>M.vals['a'+i]==null||M.vals['a'+i]==='');if(miss){s.textContent='"'+miss.label+'" 답을 먼저 써 주세요.';return}
-  if(!subArm){b.textContent='한 번 더 누르면 제출';b.classList.add('warn');s.textContent='제출하면 고칠 수 없어요.'+(M.answer.trim()?'':' 설명 칸이 비어 있어요.');subArm=setTimeout(()=>renderSubmit(),4000);return}
+  if(!subArm){b.textContent='한 번 더 누르면 제출';b.classList.add('warn');s.textContent='제출하면 고칠 수 없어요.'+(M.frozen?'':' 남은 실험 시간은 버려져요.')+(M.answer.trim()?'':' 설명 칸이 비어 있어요.');subArm=setTimeout(()=>renderSubmit(),4000);return}
   submit()}
 function submit(){
-  const checks=DEFN.checks.map(c=>{const r=c.fn();return {label:c.label,ok:!!r.ok,detail:r.detail||''}});solve();
+  const g=M.frozen||gradeNow();
   const answers=DEFN.ask.map((a,i)=>{const v=M.vals['a'+i];const want=a.ans(M);
     return a.kind==='num'?{label:a.label,given:v+a.unit,correct:want+a.unit,ok:parseInt(v,10)===want}:{label:a.label,given:a.options[v],correct:a.options[want],ok:v===want}});
-  render(performance.now()/1000);
-  M.sub={at:Date.now(),t:Math.round(M.active),checks,answers,thumb:thumb(),parts:itemSummary()};M.thumb=M.sub.thumb;
-  log('제출함 · 실험대 준비물: '+M.sub.parts,'goal');sel=null;drag=null;
-  renderTabs();renderBar();renderAsk();renderSubmit();renderTray();$('#manswer').disabled=true;$('#reset').disabled=true;$('#undo').disabled=true;
-  status('제출했어요. 다른 문항으로 넘어가세요.');toast('제출했어요');saveNow()}
+  M.sub={at:Date.now(),t:Math.round((g.at-M.startAt)/1000),checks:g.checks,answers,thumb:g.thumb,parts:g.parts,timeout:!!(M.frozen&&M.frozen.auto),chances:M.chances||0};M.thumb=M.sub.thumb;
+  log('제출함','goal');sel=null;drag=null;
+  renderTabs();renderBar();renderAsk();renderSubmit();renderTray();renderClock();$('#manswer').disabled=true;$('#reset').disabled=true;$('#undo').disabled=true;
+  const all=ITEMS.every(m=>DB.ms[m.id]&&DB.ms[m.id].sub);status(all?'모든 모듈 보고 완료! 맨 위 평가 기록 보기에서 잠긴 PDF를 저장해 패들렛에 올리세요.':STATION[DEFN.id].mod+' 수리 보고를 마쳤어요. 정거장 지도에서 다른 모듈로 넘어가세요.');toast(STATION[DEFN.id].mod+' 보고 완료');saveNow()}
 
 /* ---------- opening tabs ---------- */
 function openTab(id){
-  if(M&&!M.sub)M.thumb=thumb();
+  if(M&&!isLocked())M.thumb=thumb();
   DB.cur=id;DEFN=ITEMS.find(m=>m.id===id);
   if(!DB.ms[id])DB.ms[id]=blank(DEFN);M=DB.ms[id];
   RT={};hist=[];sel=null;drag=null;G.motorDirs=new Set();
   for(const c of M.clips){c.dx=c.x;c.dy=c.y;c.da=c.ang}
-  const lk=isLocked();
-  $('#mno').textContent='문항 '+(ITEMS.indexOf(DEFN)+1);$('#mcode').textContent=DEFN.code;$('#mtitle').textContent=DEFN.title;$('#mstory').textContent=DEFN.story;$('#mquestion').textContent=DEFN.question;
-  $('#manswer').value=M.answer||'';$('#manswer').disabled=lk;
-  renderTasks();renderAsk();renderSubmit();renderTabs();renderTray();renderBar();$('#undo').disabled=true;$('#reset').disabled=lk;
+  $('#mno').textContent='모듈 '+(ITEMS.indexOf(DEFN)+1)+' · '+STATION[id].mod;$('#mission').innerHTML=IC[id]+'<div><b>'+esc(STATION[id].mod)+' 수리 임무</b><span>'+esc(STATION[id].mission)+'</span></div>';$('#mcode').textContent=DEFN.code;$('#mtitle').textContent=DEFN.title;$('#mstory').textContent=DEFN.story;$('#mquestion').textContent=DEFN.question;
+  $('#manswer').value=M.answer||'';$('#manswer').disabled=answersLocked();
+  renderTasks();renderAsk();renderSubmit();renderTabs();renderTray();renderBar();$('#undo').disabled=true;$('#reset').disabled=isLocked();
   solve();updateMagnets();updateClips(1);for(let k=0;k<40;k++)updateCompass(1/30);for(const k in RT)if(RT[k].needle!=null)RT[k].nv=0;
   primeObs();
-  if(!M.log.length)log('문항 시작');
-  status(lk?'제출한 문항이에요. 실험대를 볼 수만 있어요.':sampleOf()?'견본은 움직일 수 없고 상자도 열 수 없어요. 준비물로 회로를 직접 만들어 견본과 비교해 보세요.':'준비물을 골라 회로를 직접 만들어 보세요.');save()}
+  if(!M.log.length)log('문항 엶');
+  renderClock();   // also freezes an item whose time ran out while another item was open
+  if(!M.frozen&&!M.sub)status(!M.startAt?'문제를 읽고 준비가 되면 실험대의 수리 시작을 누르세요. 그때부터 '+(ITEM_SEC/60)+'분이 흘러요.':'시간이 흐르고 있어요. 준비물로 회로를 만들어 보세요.');
+  else if(M.sub)status('제출한 문항이에요. 실험대를 볼 수만 있어요.');
+  save()}
 $('#manswer').addEventListener('input',e=>{M.answer=e.target.value;save()});
 $('#sname').value=DB.name||'';$('#sname').addEventListener('input',e=>{DB.name=e.target.value;save()});
 $('#undo').onclick=undo;
+$('#startBtn').onclick=startItem;
+$('#chanceBtn').onclick=useChance;
 let resetArm=0;
 $('#reset').onclick=()=>{if(isLocked())return;const b=$('#reset');if(!resetArm){resetArm=setTimeout(()=>{resetArm=0;b.textContent='처음으로';b.classList.remove('warn')},3000);b.textContent='한 번 더 누르면 처음으로';b.classList.add('warn');return}
-  clearTimeout(resetArm);resetArm=0;b.textContent='처음으로';b.classList.remove('warn');checkpoint();restore(M,M.initial);RT={};for(const c of M.clips){c.dx=c.x;c.dy=c.y}select(null);log('처음으로 되돌림');status('실험대를 처음 상태로 되돌렸어요.');save()};
+  clearTimeout(resetArm);resetArm=0;b.textContent='처음으로';b.classList.remove('warn');checkpoint();restore(M,M.initial);RT={};for(const c of M.clips){c.dx=c.x;c.dy=c.y}select(null);log('처음으로 되돌림');status('실험대를 처음 상태로 되돌렸어요. 시간은 계속 흘러요.');save()};
 
 /* ---------- records (student view / teacher view) ---------- */
 function thumb(){try{const c=document.createElement('canvas');c.width=600;c.height=360;c.getContext('2d').drawImage(cv,0,0,600,360);return c.toDataURL('image/jpeg',.72)}catch(e){return ''}}
@@ -978,57 +1124,135 @@ const maxOf=def=>def.checks.length+def.ask.length;
 function scoreOf(r){if(!r||!r.sub)return null;return {got:r.sub.checks.filter(c=>c.ok).length+r.sub.answers.filter(a=>a.ok).length,max:r.sub.checks.length+r.sub.answers.length}}
 function totals(){let got=0,max=0,n=0;for(const d of ITEMS){max+=maxOf(d);const sc=scoreOf(DB.ms[d.id]);if(sc){got+=sc.got;n++}}return {got,max,n}}
 function triedText(def,r){if(def.table&&Object.keys(r.table).length)return '시험해 본 전지 수와 클립 수: '+Object.keys(r.table).sort().map(n=>'전지 '+n+'개 → 클립 '+r.table[n]+'개').join(', ');return ''}
+function timeText(r){if(r.sub)return '실험 '+fmtT(r.sub.t)+(r.sub.timeout?' (시간이 끝나 자동 채점)':' (일찍 마침)')+(r.sub.chances?' · 예비 배터리 '+r.sub.chances+'번':'');
+  if(r.frozen)return '시간 끝 · 아직 제출하지 않음';if(r.startAt)return '실험 중 · 아직 제출하지 않음';return '아직 시작하지 않음'}
 let teacher=false;
 function reportHTML(full,tv){
-  let h='<p class="meta">이름: <b>'+esc(DB.name||'(이름 없음)')+'</b> · '+new Date().toLocaleString('ko-KR')+'</p>';
+  let h='<p class="meta">이름: <b>'+esc(DB.name||'(이름 없음)')+'</b> · '+new Date().toLocaleString('ko-KR')+' · 예비 배터리 '+chancesUsed()+' / '+CHANCES+'번 씀</p>';
   if(tv){const t=totals();h+='<p class="total">합계 <b>'+t.got+' / '+t.max+'점</b> · 제출한 문항 '+t.n+' / '+ITEMS.length+'</p>'}
   ITEMS.forEach((def,i)=>{const r=DB.ms[def.id];const img=r&&(r.sub?r.sub.thumb:r.thumb);
     h+='<section class="rm"><div>'+(img?'<img alt="'+esc(def.title)+' 실험대" src="'+img+'">':'')+'</div><div><h3>'+(i+1)+'. '+esc(def.title)+' <span class="tag">'+esc(def.code)+'</span></h3>';
     if(!r){h+='<div class="meta">아직 열어 보지 않았어요.</div></div></section>';return}
     const acts=r.log.filter(l=>l.k==='act').length;
-    h+='<div class="meta">'+(r.sub?'제출함 · 걸린 시간 '+fmtT(r.sub.t)+' · 실험대 준비물 '+esc(r.sub.parts):'아직 제출하지 않음 · 푼 시간 '+fmtT(r.active))+' · 조작 '+acts+'번</div>';
+    h+='<div class="meta">'+esc(timeText(r))+' · 조작 '+acts+'번'+(r.sub?' · 실험대 준비물 '+esc(r.sub.parts):'')+'</div>';
     if(r.sub&&tv){const sc=scoreOf(r);
-      h+='<table class="score-t"><tr><th>채점 기준</th><th>제출할 때의 모습 / 답</th><th>결과</th></tr>'+
+      h+='<table class="score-t"><tr><th>채점 기준</th><th>채점할 때의 모습 / 답</th><th>결과</th></tr>'+
         r.sub.checks.map(c=>'<tr><td>회로 · '+esc(c.label)+'</td><td>'+esc(c.detail)+'</td><td class="'+(c.ok?'ok':'no')+'">'+(c.ok?'○':'×')+'</td></tr>').join('')+
         r.sub.answers.map(a=>'<tr><td>답 · '+esc(a.label)+'</td><td>쓴 답 '+esc(a.given)+' · 정답 '+esc(a.correct)+'</td><td class="'+(a.ok?'ok':'no')+'">'+(a.ok?'○':'×')+'</td></tr>').join('')+
         '<tr><td colspan="2"><b>점수</b></td><td><b>'+sc.got+' / '+sc.max+'</b></td></tr></table>';
       const tr=triedText(def,r);if(tr)h+='<div class="meta">'+esc(tr)+'</div>'}
     else if(r.sub&&r.sub.answers.length)h+='<div class="meta">쓴 답: '+r.sub.answers.map(a=>esc(a.label)+' '+esc(a.given)).join(', ')+'</div>';
     h+='<div class="ans'+(r.answer?'':' empty')+'">'+(r.answer?esc(r.answer):'설명을 쓰지 않았어요.')+'</div>';
-    if(tv&&r.sub&&!full)h+='<button type="button" class="tb warn" data-reopen="'+def.id+'">이 문항 다시 풀게 하기</button>';
+    if(tv&&(r.sub||r.frozen)&&!full)h+='<button type="button" class="tb warn" data-reopen="'+def.id+'">이 문항 다시 풀게 하기 (3분 새로)</button>';
     h+=logList(r,full)+'</div></section>'});
   return h}
-function reportText(){const t=totals();let s='전기 단원평가 기록\n이름: '+(DB.name||'(이름 없음)')+'\n'+new Date().toLocaleString('ko-KR')+'\n합계 '+t.got+' / '+t.max+'점 (제출 '+t.n+'/'+ITEMS.length+')\n';
-  ITEMS.forEach((def,i)=>{const r=DB.ms[def.id];if(!r)return;s+='\n■ '+(i+1)+'. '+def.title+(r.sub?' (제출, 걸린 시간 '+fmtT(r.sub.t)+')':' (제출 안 함)')+'\n';
+function reportText(){const t=totals();let s='전기 단원평가 기록\n이름: '+(DB.name||'(이름 없음)')+'\n'+new Date().toLocaleString('ko-KR')+'\n합계 '+t.got+' / '+t.max+'점 (제출 '+t.n+'/'+ITEMS.length+') · 예비 배터리 '+chancesUsed()+'/'+CHANCES+'번 씀\n';
+  ITEMS.forEach((def,i)=>{const r=DB.ms[def.id];if(!r)return;s+='\n■ '+(i+1)+'. '+def.title+' ('+timeText(r)+')\n';
     if(r.sub){r.sub.checks.forEach(c=>s+='  '+(c.ok?'○':'×')+' 회로 · '+c.label+' ('+c.detail+')\n');r.sub.answers.forEach(a=>s+='  '+(a.ok?'○':'×')+' 답 · '+a.label+': '+a.given+' (정답 '+a.correct+')\n');const sc=scoreOf(r);s+='  점수 '+sc.got+'/'+sc.max+'\n';const tr=triedText(def,r);if(tr)s+='  '+tr+'\n'}
     s+='  나의 설명: '+(r.answer||'(없음)').replace(/\n/g,'\n    ')+'\n  과정:\n';r.log.forEach(l=>s+='    '+fmtT(l.t)+' '+l.s+'\n')});
   return s}
-function showRecords(){$('#repBody').innerHTML=reportHTML(false,teacher);$('#teacherZone').hidden=!teacher;$('#pinRow').hidden=teacher;
-  $('#repBody').querySelectorAll('[data-reopen]').forEach(b=>b.onclick=()=>{const r=DB.ms[b.dataset.reopen];if(!r)return;r.sub=null;r.log.push({t:Math.round(r.active),s:'선생님이 문항을 다시 열어 줌',k:'goal'});saveNow();if(DB.cur===b.dataset.reopen)openTab(DB.cur);else renderTabs();showRecords()})}
-$('#openReport').onclick=()=>{if(M&&!M.sub)M.thumb=thumb();save();teacher=false;$('#pin').value='';$('#pinMsg').textContent='';showRecords();$('#reportWrap').hidden=false;$('#closeRep').focus()};
+function showRecords(){$('#repBody').innerHTML=reportHTML(false,teacher);$('#teacherZone').hidden=!teacher;$('#pinRow').hidden=teacher;$('#copyRep').hidden=!teacher;
+  $('#repBody').querySelectorAll('[data-reopen]').forEach(b=>b.onclick=()=>{const r=DB.ms[b.dataset.reopen];if(!r)return;r.sub=null;r.frozen=null;r.startAt=null;r.log.push({t:Math.round(r.active),s:'선생님이 문항을 다시 열어 줌',k:'goal'});saveNow();if(DB.cur===b.dataset.reopen)openTab(DB.cur);else renderTabs();showRecords()})}
+$('#openReport').onclick=()=>{if(M&&!isLocked())M.thumb=thumb();save();teacher=false;$('#pin').value='';$('#pinMsg').textContent='';$('#code1').value='';$('#code2').value='';$('#pdfMsg').textContent='';showRecords();$('#reportWrap').hidden=false;$('#closeRep').focus()};
 $('#pinBtn').onclick=()=>{if($('#pin').value.trim()===TEACHER_PIN){teacher=true;showRecords()}else{$('#pinMsg').textContent='번호가 맞지 않아요.'}};
 $('#pin').addEventListener('keydown',e=>{if(e.key==='Enter')$('#pinBtn').click()});
 $('#closeRep').onclick=()=>{$('#reportWrap').hidden=true;teacher=false};
 $('#reportWrap').addEventListener('click',e=>{if(e.target.id==='reportWrap'){$('#reportWrap').hidden=true;teacher=false}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#reportWrap').hidden){$('#reportWrap').hidden=true;teacher=false}});
-$('#copyRep').onclick=async()=>{const b=$('#copyRep');try{await navigator.clipboard.writeText(reportText());b.textContent='복사했어요'}catch(e){const ta=document.createElement('textarea');ta.value=reportText();ta.style.width='100%';ta.rows=10;$('#repBody').prepend(ta);ta.select();b.textContent='아래 글을 선택해 복사하세요'}setTimeout(()=>b.textContent='글로 복사',2500)};
-function recordHTML(){return '<!doctype html><html lang="ko"><meta charset="utf-8"><title>전기 단원평가 - '+esc(DB.name)+'</title><style>body{font:15px/1.6 sans-serif;max-width:900px;margin:24px auto;padding:0 16px;color:#17312e}.rm{display:grid;grid-template-columns:240px 1fr;gap:16px;border-top:2px solid #ccd;padding:12px 0}img{max-width:100%;border:1px solid #ccd;border-radius:6px}.ans{white-space:pre-wrap;background:#f4f6f3;padding:8px;border-radius:6px}.meta{color:#556}.total{font-size:18px}.tag{font-size:12px;color:#0f6b65}table{border-collapse:collapse;width:100%;font-size:14px;margin:6px 0}td,th{border:1px solid #ccd;padding:4px 8px;text-align:left}td.ok{color:#23804a;font-weight:700;text-align:center}td.no{color:#c9412f;font-weight:700;text-align:center}li.goal{color:#23804a;font-weight:600}li.obs{color:#7a5a00}ol{font-size:13px}</style><h1>전기 단원평가 기록</h1>'+reportHTML(true,true)}
-function recordName(){return '전기단원평가-'+(DB.name||'학생').replace(/[\\/:*?"<>|]/g,'')+'.html'}
-let inFrame=true;try{inFrame=window.self!==window.top}catch(e){}
-if(!inFrame){$('#dlRep').hidden=false;$('#dlRep').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([recordHTML()],{type:'text/html'}));a.download=recordName();a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}}
-else if(window.claude&&window.claude.use){window.claude.use('downloads').then(dl=>{if(!dl)return;const b=$('#dlRep');b.hidden=false;b.onclick=async()=>{try{await dl.save({filename:recordName(),data:recordHTML()});b.textContent='저장했어요'}catch(e){b.textContent=e&&e.code==='declined'?'파일로 저장':'저장할 수 없어요';if(e&&e.code!=='declined'&&e.code!=='rate_limited')b.disabled=true}setTimeout(()=>{if(!b.disabled)b.textContent='파일로 저장'},2500)}}).catch(()=>{})}
+$('#copyRep').onclick=async()=>{if(!teacher)return;const b=$('#copyRep');try{await navigator.clipboard.writeText(reportText());b.textContent='복사했어요'}catch(e){const ta=document.createElement('textarea');ta.value=reportText();ta.style.width='100%';ta.rows=10;$('#repBody').prepend(ta);ta.select();b.textContent='아래 글을 선택해 복사하세요'}setTimeout(()=>b.textContent='글로 복사',2500)};
 let wipeArm=0;
 $('#wipe').onclick=()=>{if(!teacher)return;const b=$('#wipe');if(!wipeArm){b.textContent='정말 지울까요? 한 번 더 누르세요';wipeArm=setTimeout(()=>{wipeArm=0;b.textContent='모든 기록 지우고 다음 학생 시작'},3500);return}
   clearTimeout(wipeArm);wipeArm=0;DB={name:'',cur:'q1',ms:{},plan:null};M=null;$('#sname').value='';saveNow();$('#reportWrap').hidden=true;teacher=false;b.textContent='모든 기록 지우고 다음 학생 시작';openTab('q1')};
 
+/* ---------- locked PDF (학생이 정한 코드 또는 선생님 확인 번호로만 열림) ---------- */
+// Result pages are drawn on canvases, embedded as JPEG images, and the PDF is encrypted with the
+// standard security handler (RC4 128-bit, revision 3). User password = the student's code, owner
+// password = TEACHER_PIN; PDF viewers open the file with either one.
+const PDF_PAD=[0x28,0xBF,0x4E,0x5E,0x4E,0x75,0x8A,0x41,0x64,0x00,0x4E,0x56,0xFF,0xFA,0x01,0x08,0x2E,0x2E,0x00,0xB6,0xD0,0x68,0x3E,0x80,0x2F,0x0C,0xA9,0xFE,0x64,0x53,0x69,0x7A];
+function md5(msg){const S=[7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+  const K=new Int32Array(64);for(let i=0;i<64;i++)K[i]=Math.floor(Math.abs(Math.sin(i+1))*4294967296)|0;
+  const n=msg.length,len=(((n+8)>>>6)+1)*64;const b=new Uint8Array(len);b.set(msg);b[n]=0x80;const dv=new DataView(b.buffer);const bits=n*8;dv.setUint32(len-8,bits>>>0,true);dv.setUint32(len-4,Math.floor(bits/4294967296),true);
+  let a0=0x67452301|0,b0=0xefcdab89|0,c0=0x98badcfe|0,d0=0x10325476|0;const X=new Int32Array(16);
+  for(let off=0;off<len;off+=64){for(let i=0;i<16;i++)X[i]=dv.getInt32(off+i*4,true);let A=a0,B=b0,C=c0,D=d0;
+    for(let i=0;i<64;i++){let F,g;if(i<16){F=(B&C)|(~B&D);g=i}else if(i<32){F=(D&B)|(~D&C);g=(5*i+1)&15}else if(i<48){F=B^C^D;g=(3*i+5)&15}else{F=C^(B|~D);g=(7*i)&15}
+      F=(F+A+K[i]+X[g])|0;A=D;D=C;C=B;B=(B+((F<<S[i])|(F>>>(32-S[i]))))|0}
+    a0=(a0+A)|0;b0=(b0+B)|0;c0=(c0+C)|0;d0=(d0+D)|0}
+  const out=new Uint8Array(16),o=new DataView(out.buffer);o.setInt32(0,a0,true);o.setInt32(4,b0,true);o.setInt32(8,c0,true);o.setInt32(12,d0,true);return out}
+function rc4(key,data){const S=new Uint8Array(256);for(let i=0;i<256;i++)S[i]=i;let j=0;for(let i=0;i<256;i++){j=(j+S[i]+key[i%key.length])&255;const t=S[i];S[i]=S[j];S[j]=t}
+  const out=new Uint8Array(data.length);let i=0;j=0;for(let k=0;k<data.length;k++){i=(i+1)&255;j=(j+S[i])&255;const t=S[i];S[i]=S[j];S[j]=t;out[k]=data[k]^S[(S[i]+S[j])&255]}return out}
+const bcat=(...a)=>{const o=new Uint8Array(a.reduce((s,x)=>s+x.length,0));let p=0;for(const x of a){o.set(x,p);p+=x.length}return o};
+function padPw(s){const e=[...String(s)].map(c=>c.charCodeAt(0)&255).slice(0,32);const b=new Uint8Array(32);b.set(e);b.set(PDF_PAD.slice(0,32-e.length),e.length);return b}
+function pdfCrypt(userPw,ownerPw,id){
+  let h=md5(padPw(ownerPw));for(let i=0;i<50;i++)h=md5(h);
+  let O=rc4(h,padPw(userPw));for(let i=1;i<=19;i++)O=rc4(h.map(x=>x^i),O);
+  const P=-4,Pb=new Uint8Array(4);new DataView(Pb.buffer).setInt32(0,P,true);
+  let key=md5(bcat(padPw(userPw),O,Pb,id));for(let i=0;i<50;i++)key=md5(key);
+  let U=rc4(key,md5(bcat(new Uint8Array(PDF_PAD),id)));for(let i=1;i<=19;i++)U=rc4(key.map(x=>x^i),U);
+  return {O,U:bcat(U,new Uint8Array(16)),P,objKey:(num,gen)=>md5(bcat(key,new Uint8Array([num&255,(num>>8)&255,(num>>16)&255,gen&255,(gen>>8)&255])))}}
+function makePdf(pages,userPw,ownerPw){   // pages: [{jpg:Uint8Array,w,h}]
+  const id=crypto.getRandomValues(new Uint8Array(16)),C=pdfCrypt(userPw,ownerPw,id),te=new TextEncoder();
+  const chunks=[],offs=[];let len=0;const put=x=>{const b=typeof x==='string'?te.encode(x):x;chunks.push(b);len+=b.length};
+  const obj=(num,body)=>{offs[num]=len;put(num+' 0 obj\n'+body+'\nendobj\n')};
+  const stream=(num,dict,data)=>{const e=rc4(C.objKey(num,0),data);offs[num]=len;put(num+' 0 obj\n<<'+dict+'/Length '+e.length+'>>\nstream\n');put(e);put('\nendstream\nendobj\n')};
+  const hex=b=>[...b].map(x=>x.toString(16).padStart(2,'0')).join('');const n=pages.length,en=3+3*n;
+  put(new Uint8Array([37,80,68,70,45,49,46,52,10,37,226,227,207,211,10]));   // %PDF-1.4 + binary marker
+  obj(1,'<</Type/Catalog/Pages 2 0 R>>');
+  obj(2,'<</Type/Pages/Count '+n+'/Kids['+pages.map((_,i)=>(3+3*i)+' 0 R').join(' ')+']>>');
+  pages.forEach((p,i)=>{const pn=3+3*i;
+    obj(pn,'<</Type/Page/Parent 2 0 R/MediaBox[0 0 595.28 841.89]/Resources<</XObject<</Im0 '+(pn+2)+' 0 R>>>>/Contents '+(pn+1)+' 0 R>>');
+    stream(pn+1,'',te.encode('q 595.28 0 0 841.89 0 0 cm /Im0 Do Q'));
+    stream(pn+2,'/Type/XObject/Subtype/Image/Width '+p.w+'/Height '+p.h+'/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode',p.jpg)});
+  obj(en,'<</Filter/Standard/V 2/R 3/Length 128/P '+C.P+'/O<'+hex(C.O)+'>/U<'+hex(C.U)+'>>>');
+  const xref=len;let x='xref\n0 '+(en+1)+'\n0000000000 65535 f \n';for(let k=1;k<=en;k++)x+=String(offs[k]).padStart(10,'0')+' 00000 n \n';
+  put(x+'trailer\n<</Size '+(en+1)+'/Root 1 0 R/Encrypt '+en+' 0 R/ID[<'+hex(id)+'><'+hex(id)+'>]>>\nstartxref\n'+xref+'\n%%EOF\n');
+  return new Blob(chunks,{type:'application/pdf'})}
+const loadImg=src=>new Promise(res=>{if(!src)return res(null);const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src});
+async function resultPages(){
+  const PW=1240,PH=1754,X0=80,CW=PW-160,pages=[];const font=(w,s)=>w+' '+s+'px "IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif';
+  const page=()=>{const c=document.createElement('canvas');c.width=PW;c.height=PH;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,PW,PH);g.textBaseline='top';pages.push(c);return g};
+  const wrap=(g,str,x,y,maxW,lh,maxY)=>{for(const para of String(str).split('\n')){let line='';for(const ch of para){if(line&&g.measureText(line+ch).width>maxW){if(y+lh>maxY){g.fillText(line+' …',x,y);return y+lh}g.fillText(line,x,y);y+=lh;line=ch}else line+=ch}g.fillText(line,x,y);y+=lh;if(y>maxY)return y}return y};
+  const band=(g,title,sub)=>{g.fillStyle='#0f6b65';g.fillRect(0,0,PW,150);g.fillStyle='#fff';g.font=font(700,46);g.fillText(title,X0,38);g.font=font(500,24);g.fillStyle='#cfe6e2';g.fillText(sub,X0,100)};
+  const t=totals(),who=(DB.name||'(이름 없음)')+' · '+new Date().toLocaleString('ko-KR');
+  let g=page();band(g,'전기 단원평가 결과',who);
+  g.fillStyle='#17312e';g.font=font(700,40);g.fillText('합계 '+t.got+' / '+t.max+'점',X0,200);g.font=font(500,26);g.fillStyle='#4f625d';g.fillText('제출한 문항 '+t.n+' / '+ITEMS.length+' · 예비 배터리 '+chancesUsed()+' / '+CHANCES+'번 씀',X0,258);
+  let y=330;g.font=font(700,26);g.fillStyle='#17312e';['문항','실험 시간','점수'].forEach((h,i)=>g.fillText(h,[X0,X0+640,X0+930][i],y));y+=46;g.fillStyle='#d3dbd6';g.fillRect(X0,y-8,CW,2);
+  ITEMS.forEach((d,i)=>{const r=DB.ms[d.id],sc=scoreOf(r);g.font=font(500,25);g.fillStyle='#17312e';g.fillText((i+1)+'. '+d.title,X0,y+6);
+    g.fillText(r&&r.sub?fmtT(r.sub.t)+(r.sub.chances?' (예비 배터리 '+r.sub.chances+')':''):'-',X0+640,y+6);g.fillText(sc?sc.got+' / '+sc.max:'제출 안 함',X0+930,y+6);y+=58;g.fillStyle='#e6ebe7';g.fillRect(X0,y-6,CW,1)});
+  g.font=font(500,22);g.fillStyle='#4f625d';wrap(g,'이 파일은 학생이 정한 코드나 선생님 확인 번호로만 열려요. 다음 쪽부터 문항별 실험대 사진, 채점, 답, 설명, 문제 해결 과정이 있어요.',X0,y+40,CW,34,PH-80);
+  for(let i=0;i<ITEMS.length;i++){const d=ITEMS[i],r=DB.ms[d.id];g=page();band(g,(i+1)+'. '+d.title,d.code+' · '+(r?timeText(r):'아직 열어 보지 않음'));
+    y=190;if(!r){g.font=font(500,28);g.fillStyle='#4f625d';g.fillText('아직 풀지 않은 문항이에요.',X0,y);continue}
+    const im=await loadImg(r.sub?r.sub.thumb:r.thumb);if(im){const h=Math.round(CW*360/600);g.drawImage(im,X0,y,CW,h);g.strokeStyle='#d3dbd6';g.lineWidth=2;g.strokeRect(X0,y,CW,h);y+=h+30}
+    g.font=font(700,28);g.fillStyle='#17312e';
+    if(r.sub){const sc=scoreOf(r);g.fillText('채점  '+sc.got+' / '+sc.max+'점',X0,y);y+=48;
+      for(const c of r.sub.checks){g.font=font(700,26);g.fillStyle=c.ok?'#23804a':'#c9412f';g.fillText(c.ok?'○':'×',X0,y);g.font=font(500,24);g.fillStyle='#17312e';y=wrap(g,'회로 · '+c.label+' — '+c.detail,X0+44,y,CW-44,36,PH-200)+6}
+      for(const a of r.sub.answers){g.font=font(700,26);g.fillStyle=a.ok?'#23804a':'#c9412f';g.fillText(a.ok?'○':'×',X0,y);g.font=font(500,24);g.fillStyle='#17312e';y=wrap(g,'답 · '+a.label+': '+a.given+' (정답 '+a.correct+')',X0+44,y,CW-44,36,PH-200)+6}
+      const tr=triedText(d,r);if(tr){g.font=font(500,22);g.fillStyle='#4f625d';y=wrap(g,tr,X0,y+4,CW,32,PH-200)}}
+    else{g.fillText('아직 제출하지 않았어요.',X0,y);y+=48}
+    y+=18;g.font=font(700,26);g.fillStyle='#17312e';g.fillText('나의 설명',X0,y);y+=42;g.font=font(500,24);y=wrap(g,r.answer||'(쓰지 않음)',X0,y,CW,36,PH-260)+18;
+    g.font=font(700,24);g.fillText('문제 해결 과정',X0,y);y+=38;g.font=font(400,19);g.fillStyle='#4f625d';
+    for(let k=0;k<r.log.length;k++){if(y>PH-90){g.fillText('… 외 '+(r.log.length-k)+'줄',X0,y);break}const l=r.log[k];g.fillStyle=l.k==='goal'?'#23804a':l.k==='obs'?'#7a5a00':'#4f625d';y=wrap(g,fmtT(l.t)+'  '+l.s,X0,y,CW,28,PH-60)}}
+  return pages}
+async function savePdf(){const msg=$('#pdfMsg'),b=$('#pdfBtn');const c1=$('#code1').value.trim(),c2=$('#code2').value.trim();
+  if(!DB.name.trim()){msg.textContent='맨 위에 이름을 먼저 써 주세요.';return}
+  if(!/^[A-Za-z0-9]{4,12}$/.test(c1)){msg.textContent='코드는 영어나 숫자로 4~12자리로 정해 주세요.';return}
+  if(c1!==c2){msg.textContent='두 칸의 코드가 서로 달라요.';return}
+  b.disabled=true;msg.textContent='PDF를 만들고 있어요…';
+  try{if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+    const cs=await resultPages();const pages=cs.map(c=>{const u=c.toDataURL('image/jpeg',.85);const s=atob(u.slice(u.indexOf(',')+1));const a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return {jpg:a,w:c.width,h:c.height}});
+    const blob=makePdf(pages,c1,TEACHER_PIN);const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='전기단원평가-'+DB.name.replace(/[\\/:*?"<>|]/g,'').trim()+'.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+    log('잠긴 PDF로 저장함','act');saveNow();msg.textContent='저장했어요. 이 파일을 패들렛에 올리세요. 코드를 잊지 마세요!';$('#code1').value='';$('#code2').value=''}
+  catch(e){msg.textContent='PDF를 만들 수 없어요. 다시 해 보세요.'}
+  b.disabled=false}
+$('#pdfBtn').onclick=savePdf;
+
 /* ---------- loop ---------- */
 let gT=0;
 function loop(now){const dt=Math.min(.05,(now-tPrev)/1000);tPrev=now;
-  if(!document.hidden&&M&&!M.temp&&!M.sub)M.active+=dt;
+  if(!document.hidden&&M&&!M.temp&&!isLocked())M.active+=dt;
   for(const id in RT){const r=RT[id];if(r.flash>0)r.flash=Math.max(0,r.flash-dt*2);if(r.wind!=null){r.wind+=dt*1.6;if(r.wind>=1)delete r.wind}if(r.spark)r.spark=r.spark.map(v=>Math.max(0,v-dt*1.5))}
   if(M)step(dt);render(now/1000);
   if(tableDirty){tableDirty=false;save()}
-  if(now-gT>200){gT=now;updateTrayCounts()}
+  if(now-gT>200){gT=now;updateTrayCounts();updateClock()}
   requestAnimationFrame(loop)}
 window.addEventListener('resize',fit);
 if('ResizeObserver' in window)new ResizeObserver(fit).observe($('#stage'));
